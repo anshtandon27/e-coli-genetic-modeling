@@ -35,7 +35,8 @@ for i = 1:size(fileNames, 2)-1
 
     %Pick edge that is above 20% of max threshold at each timepoint
     edge = (img-background) >= 0.2*maxThresh;
-    radius = sqrt((x_center-xGFP)^2 + (y_center-yGFP)^2);
+    diameterMax = max(sum(edge, 1)); %Take the sum of white edges, to get diameter, pick maximum for diameter of circle
+    radius = diameterMax/2;
     radiusList = [radiusList; radius];
 
     viscircles([x_center, y_center], radius);
